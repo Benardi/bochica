@@ -16,10 +16,6 @@ NEWSPIDER_MODULE = 'bochica.spiders'
 
 DEADLINE = "01.01.2018" # DD.MM.YYYY
 
-MONGODB_SERVER = "localhost"
-MONGODB_PORT = 27017
-MONGODB_DB = "news"
-
 USER_AGENTS = [
     ('Mozilla/5.0 (X11; Linux x86_64) '
      'AppleWebKit/537.36 (KHTML, like Gecko) '
