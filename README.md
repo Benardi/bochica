@@ -27,3 +27,11 @@ The project is laid out in four main directories
 - output
 
 The directory `seeds` has in a JSON file the seeds of the *crawling* algorithm, in other words, the starting links to be used by the crawler. The code opearates through copies of theses files in the directory `frontier`. The directory `bochica` has the project itself.
+
+# Commands to execute project
+
+> ```shell
+> scrapy list # lists all the project's spiders
+> scrapy crawl __spider_name__ -o output/results.csv # Replace with the name of your spider.
+> ```
+
