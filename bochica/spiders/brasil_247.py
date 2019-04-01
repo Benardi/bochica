@@ -13,7 +13,7 @@ class Brasil247Spider(scrapy.Spider):
 
     def __init__(self, *a, **kw):
         super(Brasil247Spider, self).__init__(*a, **kw)
-        with open('frontier/brasil247.json') as json_file:
+        with open('seeds/brasil_247.json') as json_file:
                 data = json.load(json_file)
         self.start_urls = list(data.values())
 

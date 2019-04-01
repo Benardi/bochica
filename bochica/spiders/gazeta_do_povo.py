@@ -13,7 +13,7 @@ class GazetaDoPovoSpider(scrapy.Spider):
 
     def __init__(self, *a, **kw):
         super(GazetaDoPovoSpider, self).__init__(*a, **kw)
-        with open('frontier/gazetadopovo.json') as json_file:
+        with open('seeds/gazeta_do_povo.json') as json_file:
                 data = json.load(json_file)
         self.start_urls = list(data.values())
 

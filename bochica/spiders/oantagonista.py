@@ -13,7 +13,7 @@ class OantagonistaSpider(scrapy.Spider):
 
     def __init__(self, *a, **kw):
         super(OantagonistaSpider, self).__init__(*a, **kw)
-        with open('frontier/oantagonista.json') as json_file:
+        with open('seeds/oantagonista.json') as json_file:
                 data = json.load(json_file)
         self.start_urls = list(data.values())
 

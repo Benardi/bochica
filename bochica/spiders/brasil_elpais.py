@@ -13,7 +13,7 @@ class BrasilElpaisSpider(scrapy.Spider):
 
     def __init__(self, *a, **kw):
         super(BrasilElpaisSpider, self).__init__(*a, **kw)
-        with open('frontier/brasil_elpais.json') as json_file:
+        with open('seeds/brasil_elpais.json') as json_file:
                 data = json.load(json_file)
         self.start_urls = list(data.values())
 

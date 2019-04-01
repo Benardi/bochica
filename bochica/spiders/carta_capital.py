@@ -13,7 +13,7 @@ class CartaCapitalSpider(scrapy.Spider):
 
     def __init__(self, *a, **kw):
         super(CartaCapitalSpider, self).__init__(*a, **kw)
-        with open('frontier/carta_capital.json') as json_file:
+        with open('seeds/carta_capital.json') as json_file:
                 data = json.load(json_file)
         self.start_urls = list(data.values())
 
