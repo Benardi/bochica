@@ -52,11 +52,21 @@ class BrasilElpaisSpider(scrapy.Spider):
 
        span_res = response.css("div.articulo-cuerpo span::text").getall()
        span_res_text = ''.join(span_res) 
+       
+       galeria_res = response.css("div.articulo-galeria figcaption \
+                                  span.foto-texto::text").getall()
+       galeria_res_text = ''.join(galeria_res)
 
-       if len(p_res_text) >= len(span_res_text) :
-           text = p_res
+       if len(p_res_text) >= len(span_res_text) and \
+          len(p_res_text) >= len(galeria_res_text):
+            text = p_res
+       
+       elif len(span_res_text) >= len(p_res_text) and \
+          len(span_res_text) >= len(galeria_res_text):
+            text = span_res
+
        else:
-           text = span_res
-
+            text = galeria_res
+       
        return text
 
