@@ -41,6 +41,22 @@ class BrasilElpaisSpider(scrapy.Spider):
         page_index[url]["subtitle"] = response.css("h2::text").get()
         page_index[url]["time"] = response.css("time::attr(datetime)").get()
         page_index[url]["author"] = response.css("span.autor-nombre a::text").get()
-        page_index[url]["text"] = response.css("div.articulo-cuerpo p::text").getall()
+        page_index[url]["text"] = self.locate_text(response)
     
         return page_index
+
+    def locate_text(self, response):
+       text = '' 
+       p_res = response.css("div.articulo-cuerpo p::text").getall()
+       p_res_text = ''.join(p_res) 
+
+       span_res = response.css("div.articulo-cuerpo span::text").getall()
+       span_res_text = ''.join(span_res) 
+
+       if len(p_res_text) >= len(span_res_text) :
+           text = p_res
+       else:
+           text = span_res
+
+       return text
+
