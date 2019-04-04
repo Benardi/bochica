@@ -25,7 +25,7 @@ class BrasilElpaisSpider(scrapy.Spider):
      
         for article in articles:
             url = article.css("h2.articulo-titulo a::attr(href)").get()
-            if url is not None:
+            if url :
                 url = "https:" + url 
                 yield response.follow(url, callback=self.parse_article)
 
