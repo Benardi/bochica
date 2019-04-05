@@ -1,9 +1,13 @@
+"""
+.. module:: brasil_elpais
+   :synopsis: Scrapy crawler for the website 'brasil elpais'.
+.. moduleauthor:: Benardi <github.com/Benardi>
+"""
+
 # -*- coding: utf-8 -*-
 import json
-import pdb
 
 import scrapy
-import pandas
 
 from bochica.items import ArticleItem
 from bochica.items import ArticleCommentItem
@@ -12,6 +16,17 @@ from bochica.items import ArticleCommentItem
 
 def parse_article(response):
     
+    """ Builds ArticleItem from an article page html.
+
+    Parsed html of an article page and creates an ArticleItem.
+
+    :param class 'scrapy.http.response.html.HtmlResponse' \
+           response: scrapy response object.
+
+    :return: python dictionary in ArticleItem format
+
+    :rtype: dict
+    """
     item = ArticleItem()
     item['url'] = response.request.url
     item["section"] = response.css("div.seccion-migas span span::text").get()
@@ -24,6 +39,18 @@ def parse_article(response):
     return item 
 
 def locate_text(response):
+
+   """ Deduces article page format and extract its text.
+
+   Deduces article page format and extract its text accordingly.
+
+   :param <class 'scrapy.http.response.html.HtmlResponse'> \
+          response: scrapy response object.
+
+   :return: article page text
+
+   :rtype: <class 'scrapy.http.response.html.HtmlResponse'> 
+   """
    text = '' 
    p_res = response.css("div.articulo-cuerpo p::text").getall()
    p_res_text = ''.join(p_res) 
@@ -50,6 +77,7 @@ def locate_text(response):
 
 
 class BrasilElpaisSpider(scrapy.Spider):
+
     name = 'brasil_elpais'
     allowed_domains = ['brasil.elpais.com']
     start_urls = []

@@ -4,6 +4,7 @@
 .. moduleauthor:: Benardi <github.com/Benardi>
 """
 
+# -*- coding: utf-8 -*-
 from dateutil import parser
 
 

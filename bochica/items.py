@@ -9,6 +9,10 @@ import scrapy
 
 
 class ArticleItem(scrapy.Item):
+    '''
+    The ArticleItem represents the fundamental \
+    fields of an article.
+    '''
     title = scrapy.Field()
     subtitle = scrapy.Field()
     author = scrapy.Field()
@@ -18,6 +22,10 @@ class ArticleItem(scrapy.Item):
     url = scrapy.Field()
 
 class ArticleCommentItem(scrapy.Item):
+    '''
+    The ArticleCommentItem represents the fundamental \
+    fields of an article comment.
+    '''
     id_article = scrapy.Field()
     date = scrapy.Field()
     author = scrapy.Field()

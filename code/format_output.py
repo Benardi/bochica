@@ -3,7 +3,7 @@
    :synopsis: Conform scrap results to csv format (in utf-8).
 .. moduleauthor:: Benardi <github.com/Benardi>
 """
-
+# -*- coding: utf-8 -*-
 import json, sys
 
 from chronological import conform_date

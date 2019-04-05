@@ -31,7 +31,6 @@ The directory `seeds` has in a JSON file the seeds of the *crawling* algorithm, 
 # Commands to execute project
 
 > ```shell
-> scrapy list # lists all the project's spiders
-> scrapy crawl __spider_name__ -o output/results.csv # Replace with the name of your spider.
+> make run # executes crawler for site brasil_elpais
+> make export # exports json results json of crawler to csv format.
 > ```
-
