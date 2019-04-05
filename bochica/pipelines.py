@@ -6,9 +6,9 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 from scrapy.conf import settings
 
-from bochica.items import RiLab01Item
-from bochica.items import RiLab01CommentItem
+from bochica.items import ArticleItem
+from bochica.items import ArticleCommentItem
 
-class RiLab01Pipeline(object):
+class ArticlePipeline(object):
     def process_item(self, item, spider):
         return item

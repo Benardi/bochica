@@ -2,8 +2,8 @@
 import scrapy
 import json
 
-from bochica.items import RiLab01Item
-from bochica.items import RiLab01CommentItem
+from bochica.items import ArticleItem
+from bochica.items import ArticleCommentItem
 
 
 class GazetaDoPovoSpider(scrapy.Spider):

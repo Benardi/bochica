@@ -5,8 +5,8 @@ import pdb
 import scrapy
 import pandas
 
-from bochica.items import RiLab01Item
-from bochica.items import RiLab01CommentItem
+from bochica.items import ArticleItem
+from bochica.items import ArticleCommentItem
 
 
 class BrasilElpaisSpider(scrapy.Spider):
@@ -28,22 +28,19 @@ class BrasilElpaisSpider(scrapy.Spider):
             if url :
                 url = "https:" + url 
                 yield response.follow(url, callback=self.parse_article)
-
-
-        
+   
     def parse_article(self, response):
-        url = response.request.url
-        page_index = {}
-        page_index[url] = {}
-
-        page_index[url]["section"] = response.css("div.seccion-migas span span::text").get()
-        page_index[url]["title"] = response.css("h1::text").get()
-        page_index[url]["subtitle"] = response.css("h2::text").get()
-        page_index[url]["time"] = response.css("time::attr(datetime)").get()
-        page_index[url]["author"] = response.css("span.autor-nombre a::text").get()
-        page_index[url]["text"] = self.locate_text(response)
+        
+        item = ArticleItem()
+        item['url'] = response.request.url
+        item["section"] = response.css("div.seccion-migas span span::text").get()
+        item["title"] = response.css("h1::text").get()
+        item["subtitle"] = response.css("h2::text").get()
+        item["date"] = response.css("time::attr(datetime)").get()
+        item["author"] = response.css("span.autor-nombre a::text").get()
+        item["text"] = self.locate_text(response)
     
-        return page_index
+        return item 
 
     def locate_text(self, response):
        text = '' 

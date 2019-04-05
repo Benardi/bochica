@@ -1,8 +1,8 @@
 from dateutil import parser
-import json
+import json, sys, pdb
 
 
-DF_HEADER = 'title,subtitle,author,time,section,text,url'
+DF_HEADER = 'title,subtitle,author,date,section,text,url'
 ENCODING = 'utf8'
 
 
@@ -34,24 +34,36 @@ def del_junk_chars(excerpt):
    return excerpt
   
 
-def scrap_to_csv(scrap):
-    for k,v in scrap.items():
-        line = "{0},{1},{2},{3},{4},{5},{6}" \
-                .format(del_junk_chars(v["title"]),
-                        del_junk_chars(v["subtitle"]),
-                        del_junk_chars(v["author"]),
-                        conform_date(v["time"]),
-                        del_junk_chars(v["section"]),
-                        del_junk_chars(conform_text(v["text"])), k)
-        return line
+def scrap_to_csv(item):
+    line = "{0},{1},{2},{3},{4},{5},{6}" \
+            .format(del_junk_chars(item["title"]),
+                    del_junk_chars(item["subtitle"]),
+                    del_junk_chars(item["author"]),
+                    conform_date(item["date"]),
+                    del_junk_chars(item["section"]),
+                    del_junk_chars(conform_text(item["text"])),
+                    item["url"])
+    return line
 
+def json_to_csv(orig, dest):
+   data = unpack_json(orig)
 
-data = unpack_json('../output/elpais.json')
+   with open(dest, 'w', encoding=ENCODING) as f:
 
-with open('../output/results.csv', 'w', encoding=ENCODING) as f:
-
-    f.write("{}\n".format(DF_HEADER))
+       f.write("{}\n".format(DF_HEADER))
     
-    for scrap in data:
-        f.write("{}\n".format(scrap_to_csv(scrap)))
+       for scrap in data:
+           f.write("{}\n".format(scrap_to_csv(scrap)))
+
+
+
+# script arguments
+data_source = sys.argv[1]
+data_dest = sys.argv[2]
+
+if len(sys.argv) < 3:
+    print("Please provide a source and and destination file")
+
+else:
+    json_to_csv(data_source, data_dest)
 
