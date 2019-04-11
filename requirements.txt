@@ -1,3 +1,4 @@
+nltk
 scrapy
 scrapy-useragents
 scrapy-rotating-proxies
