@@ -13113,13 +13113,6 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Building-an-index">Building an index<a class="anchor-link" href="#Building-an-index">&#182;</a></h1>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
@@ -13178,6 +13171,22 @@ $( document ).ready(code_toggle);
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Building-an-inverted-index">Building an inverted index<a class="anchor-link" href="#Building-an-inverted-index">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br></p>
+<p>In this report we'll build an inverted index with extensions to keep track of term frequency. Also, we'll implement two document retrieval techniques: document at a time and by term at a time. Employed data and auxiliary scripts can be found at the report's <a href="https://github.com/Benardi/bochica">original repository</a>.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
@@ -13202,7 +13211,7 @@ $( document ).ready(code_toggle);
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="n">default_stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;portuguese&#39;</span><span class="p">))</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;^display.&#39;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;^display.&#39;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="n">p</span>
 </pre></div>
 
     </div>
@@ -13278,6 +13287,7 @@ $( document ).ready(code_toggle);
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 <h2 id="Load-Data">Load Data<a class="anchor-link" href="#Load-Data">&#182;</a></h2>
 </div>
 </div>
@@ -13648,64 +13658,64 @@ $( document ).ready(code_toggle);
   </thead>
   <tbody>
     <tr>
-      <td>reflexo</td>
-      <td>[(21, 1), (22, 1), (64, 1), (170, 1), (220, 1)...</td>
+      <td>estatal</td>
+      <td>[(35, 1), (125, 1), (138, 1), (141, 3), (161, ...</td>
     </tr>
     <tr>
-      <td>audiências</td>
-      <td>[(239, 1)]</td>
+      <td>violentos</td>
+      <td>[(30, 1), (114, 1), (166, 1), (174, 1), (183, ...</td>
     </tr>
     <tr>
-      <td>fortemente</td>
-      <td>[(10, 1), (22, 1), (35, 1), (135, 1), (137, 1)...</td>
-    </tr>
-    <tr>
-      <td>Silas</td>
-      <td>[(204, 1)]</td>
-    </tr>
-    <tr>
-      <td>esportivos</td>
-      <td>[(46, 1)]</td>
-    </tr>
-    <tr>
-      <td>empoderando</td>
-      <td>[(234, 1)]</td>
-    </tr>
-    <tr>
-      <td>Santana-Acuña</td>
-      <td>[(12, 3)]</td>
-    </tr>
-    <tr>
-      <td>Igarapé</td>
-      <td>[(18, 1)]</td>
-    </tr>
-    <tr>
-      <td>Joshua</td>
+      <td>STEM</td>
       <td>[(109, 1)]</td>
     </tr>
     <tr>
-      <td>preta</td>
-      <td>[(64, 1), (150, 1), (171, 1)]</td>
+      <td>pego</td>
+      <td>[(118, 1)]</td>
     </tr>
     <tr>
-      <td>franquismo</td>
-      <td>[(174, 1)]</td>
+      <td>prescinde</td>
+      <td>[(18, 1)]</td>
     </tr>
     <tr>
-      <td>externa</td>
-      <td>[(95, 1), (104, 1), (106, 1), (128, 1), (131, ...</td>
+      <td>vergonha</td>
+      <td>[(3, 1), (8, 1), (18, 1), (148, 1), (150, 3), ...</td>
     </tr>
     <tr>
-      <td>herança</td>
-      <td>[(13, 1), (94, 1)]</td>
+      <td>inquisidores</td>
+      <td>[(239, 1)]</td>
     </tr>
     <tr>
-      <td>Natura</td>
-      <td>[(182, 1)]</td>
+      <td>culposo</td>
+      <td>[(4, 1)]</td>
     </tr>
     <tr>
-      <td>contingenciou</td>
-      <td>[(216, 1)]</td>
+      <td>traidor</td>
+      <td>[(62, 3)]</td>
+    </tr>
+    <tr>
+      <td>avaliou</td>
+      <td>[(204, 1), (224, 1)]</td>
+    </tr>
+    <tr>
+      <td>consigo</td>
+      <td>[(137, 1), (181, 1)]</td>
+    </tr>
+    <tr>
+      <td>atividade-fim</td>
+      <td>[(75, 1)]</td>
+    </tr>
+    <tr>
+      <td>Sasha</td>
+      <td>[(62, 1)]</td>
+    </tr>
+    <tr>
+      <td>Gaya</td>
+      <td>[(13, 1)]</td>
+    </tr>
+    <tr>
+      <td>ritmo</td>
+      <td>[(27, 1), (85, 1), (95, 1), (107, 1), (123, 1)...</td>
     </tr>
   </tbody>
 </table>
@@ -13746,7 +13756,8 @@ $( document ).ready(code_toggle);
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Retrieval-Approaches">Retrieval Approaches<a class="anchor-link" href="#Retrieval-Approaches">&#182;</a></h1>
+<h1 id="Retrieval-Approaches">Retrieval Approaches<a class="anchor-link" href="#Retrieval-Approaches">&#182;</a></h1><p><br></p>
+
 </div>
 </div>
 </div>
@@ -14244,6 +14255,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 <h2 id="Comparison-in-terms-of-time-and-memory">Comparison in terms of time and memory<a class="anchor-link" href="#Comparison-in-terms-of-time-and-memory">&#182;</a></h2>
 </div>
 </div>
@@ -14276,7 +14288,8 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Experiment-Design">Experiment Design<a class="anchor-link" href="#Experiment-Design">&#182;</a></h3>
+<h3 id="Experiment-Design">Experiment Design<a class="anchor-link" href="#Experiment-Design">&#182;</a></h3><p>Experiment was run using a bash script and auxiliary python scripts that can be found at the <a href="https://github.com/Benardi/bochica/tree/master/code">original repository</a></p>
+
 </div>
 </div>
 </div>
@@ -14321,7 +14334,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 <div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">exp_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./result.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">exp_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../output/perf_result.csv&#39;</span><span class="p">)</span>
 <span class="n">exp_results</span><span class="p">[</span><span class="s2">&quot;elapsed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exp_results</span><span class="p">[</span><span class="s2">&quot;elapsed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_sec</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="n">exp_results</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
@@ -14371,59 +14384,59 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
   </thead>
   <tbody>
     <tr>
-      <th>1154</th>
-      <td>88944</td>
-      <td>8.39</td>
-      <td>1.53</td>
-      <td>6.85</td>
-      <td>2</td>
-      <td>9</td>
-      <td>by_document</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>6350</th>
-      <td>89464</td>
-      <td>7.68</td>
-      <td>1.39</td>
-      <td>6.28</td>
-      <td>8</td>
-      <td>2</td>
-      <td>by_document</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>4225</th>
-      <td>83900</td>
-      <td>1.19</td>
-      <td>0.02</td>
-      <td>1.16</td>
-      <td>5</td>
-      <td>6</td>
-      <td>by_term</td>
-      <td>26</td>
-    </tr>
-    <tr>
-      <th>1888</th>
-      <td>89112</td>
-      <td>7.64</td>
-      <td>1.62</td>
-      <td>6.01</td>
-      <td>3</td>
-      <td>3</td>
-      <td>by_document</td>
-      <td>29</td>
-    </tr>
-    <tr>
-      <th>1634</th>
-      <td>84364</td>
-      <td>1.20</td>
-      <td>0.04</td>
-      <td>1.15</td>
-      <td>2</td>
+      <th>8961</th>
+      <td>84316</td>
+      <td>1.48</td>
+      <td>0.05</td>
+      <td>1.43</td>
       <td>10</td>
+      <td>14</td>
       <td>by_term</td>
-      <td>15</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>89296</td>
+      <td>9.73</td>
+      <td>1.92</td>
+      <td>7.79</td>
+      <td>1</td>
+      <td>1</td>
+      <td>by_document</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>6938</th>
+      <td>84356</td>
+      <td>1.47</td>
+      <td>0.06</td>
+      <td>1.40</td>
+      <td>8</td>
+      <td>7</td>
+      <td>by_term</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1121</th>
+      <td>89012</td>
+      <td>8.26</td>
+      <td>1.44</td>
+      <td>6.82</td>
+      <td>2</td>
+      <td>8</td>
+      <td>by_document</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>7738</th>
+      <td>84352</td>
+      <td>1.31</td>
+      <td>0.04</td>
+      <td>1.26</td>
+      <td>9</td>
+      <td>3</td>
+      <td>by_term</td>
+      <td>29</td>
     </tr>
   </tbody>
 </table>
@@ -14487,7 +14500,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;ggplot: (-9223363246824945443)&gt;</pre>
+<pre>&lt;ggplot: (8752108334642)&gt;</pre>
 </div>
 
 </div>
@@ -14550,7 +14563,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;ggplot: (-9223363246824883249)&gt;</pre>
+<pre>&lt;ggplot: (-9223363284746385839)&gt;</pre>
 </div>
 
 </div>
@@ -14636,7 +14649,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;ggplot: (8790029994977)&gt;</pre>
+<pre>&lt;ggplot: (8752108502732)&gt;</pre>
 </div>
 
 </div>
@@ -14699,7 +14712,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;ggplot: (-9223363246824712623)&gt;</pre>
+<pre>&lt;ggplot: (-9223363284746232225)&gt;</pre>
 </div>
 
 </div>
@@ -14762,7 +14775,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;ggplot: (8790029994914)&gt;</pre>
+<pre>&lt;ggplot: (-9223363284746179342)&gt;</pre>
 </div>
 
 </div>
@@ -14825,7 +14838,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;ggplot: (8790030037126)&gt;</pre>
+<pre>&lt;ggplot: (-9223363284746227182)&gt;</pre>
 </div>
 
 </div>
@@ -14856,6 +14869,7 @@ retrieve by doc, k=2: [(6, 0), (3, 1), (1, 124)]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 <h2 id="Conjunctive-Retrieval-Algorithm">Conjunctive Retrieval Algorithm<a class="anchor-link" href="#Conjunctive-Retrieval-Algorithm">&#182;</a></h2>
 </div>
 </div>
