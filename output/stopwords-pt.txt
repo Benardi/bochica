@@ -107,6 +107,8 @@ diante
 direita
 dispoe
 dispoem
+disso
+disto
 diversa
 diversas
 diversos
@@ -476,6 +478,7 @@ tentaram
 tente
 tentei
 ter
+terem
 terceira
 terceiro
 terei
