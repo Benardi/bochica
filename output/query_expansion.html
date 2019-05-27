@@ -13449,7 +13449,7 @@ $( document ).ready(code_toggle);
 <span class="k">def</span> <span class="nf">n_most_related</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">metric</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;metric&quot;</span><span class="p">)</span>
     <span class="n">index</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;df&quot;</span><span class="p">)</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>    
+    <span class="n">A</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>  
     <span class="n">words</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
     <span class="n">rank</span> <span class="o">=</span> <span class="p">[]</span>
     
@@ -13460,7 +13460,7 @@ $( document ).ready(code_toggle);
             <span class="ow">in</span> <span class="p">(</span><span class="n">val1</span> <span class="k">for</span> <span class="p">(</span><span class="n">val1</span><span class="p">,</span><span class="n">val2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">n_b</span><span class="p">)]</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;n_ab&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_ab</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;n_a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_a</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;n_b&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_b</span><span class="p">)</span>   
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;n_b&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_b</span><span class="p">)</span>
         <span class="n">insort_left</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="p">(</span><span class="n">metric</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span><span class="n">word</span><span class="p">))</span>
         <span class="n">rank</span> <span class="o">=</span> <span class="n">rank</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">:]</span>
     
@@ -13477,13 +13477,52 @@ $( document ).ready(code_toggle);
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># number of documents in the collection</span>
+<span class="n">n_docs</span> <span class="o">=</span> <span class="n">inv_index</span><span class="p">[</span><span class="s2">&quot;doc_id:freq&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">n_docs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">n_docs</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">&quot;* Let&#39;s employ the number  of documents in this particular </span><span class="se">\</span>
+<span class="s2">                  collection (N=</span><span class="si">{}</span><span class="s2">) in our calculations&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_docs</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<ul>
+<li>Let's employ the number  of documents in this particular                   collection (N=249) in our calculations</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">mim</span><span class="p">,</span><span class="n">emim</span><span class="p">,</span><span class="n">chi_square</span><span class="p">,</span><span class="n">dice_coef</span><span class="p">]</span>
 <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;MIM&quot;</span><span class="p">,</span><span class="s2">&quot;EMIM&quot;</span><span class="p">,</span><span class="s2">&quot;Chi-Squared&quot;</span><span class="p">,</span><span class="s2">&quot;Dice&quot;</span><span class="p">]</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;Instagram&#39;</span><span class="p">,</span>
-                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
     
@@ -13532,61 +13571,61 @@ $( document ).ready(code_toggle);
   <tbody>
     <tr>
       <td>êxito</td>
-      <td>sociais</td>
+      <td>publicadas</td>
       <td>publicadas</td>
       <td>publicadas</td>
     </tr>
     <tr>
       <td>ânsias</td>
-      <td>redes</td>
+      <td>contínuos</td>
       <td>contínuos</td>
       <td>contínuos</td>
     </tr>
     <tr>
       <td>votarão</td>
-      <td>deu</td>
+      <td>Gallup</td>
       <td>Gallup</td>
       <td>Gallup</td>
     </tr>
     <tr>
       <td>votará</td>
-      <td>5</td>
+      <td>sociais</td>
       <td>tarifas</td>
       <td>tarifas</td>
     </tr>
     <tr>
       <td>vinhos</td>
-      <td>país</td>
+      <td>tarifas</td>
       <td>exibe</td>
       <td>exibe</td>
     </tr>
     <tr>
       <td>viatura</td>
-      <td>aparece</td>
+      <td>exibe</td>
       <td>êxito</td>
       <td>jogam</td>
     </tr>
     <tr>
       <td>velinhas</td>
-      <td>totalmente</td>
+      <td>aparece</td>
       <td>ânsias</td>
       <td>império</td>
     </tr>
     <tr>
       <td>utópico</td>
-      <td>torna</td>
+      <td>totalmente</td>
       <td>votarão</td>
       <td>gás</td>
     </tr>
     <tr>
       <td>usos</td>
-      <td>Partido</td>
+      <td>torna</td>
       <td>votará</td>
       <td>aço</td>
     </tr>
     <tr>
       <td>urbana/rural</td>
-      <td>votos</td>
+      <td>jogam</td>
       <td>vinhos</td>
       <td>encerrou</td>
     </tr>
@@ -13604,10 +13643,7 @@ $( document ).ready(code_toggle);
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><em>EMIM</em> seems to have the best results, as they have more to do with the term <em>Instagram</em><ul>
-<li>The presence of the term 5 has to do with the preservation of dates in the inverted index</li>
-</ul>
-</li>
+<li><em>EMIM</em> seems to have the best results, as they have more to do with the term <em>Instagram</em></li>
 </ul>
 
 </div>
@@ -13615,7 +13651,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">mim</span><span class="p">,</span><span class="n">emim</span><span class="p">,</span><span class="n">chi_square</span><span class="p">,</span><span class="n">dice_coef</span><span class="p">]</span>
@@ -13624,7 +13660,7 @@ $( document ).ready(code_toggle);
 
 <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;criativo&#39;</span><span class="p">,</span>
-                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
     
@@ -13753,7 +13789,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">mim</span><span class="p">,</span><span class="n">emim</span><span class="p">,</span><span class="n">chi_square</span><span class="p">,</span><span class="n">dice_coef</span><span class="p">]</span>
@@ -13762,7 +13798,7 @@ $( document ).ready(code_toggle);
 
 <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;reprodução&#39;</span><span class="p">,</span>
-                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
     
@@ -13811,61 +13847,61 @@ $( document ).ready(code_toggle);
   <tbody>
     <tr>
       <td>útero</td>
-      <td>vida</td>
+      <td>plataforma</td>
       <td>médicas</td>
       <td>médicas</td>
     </tr>
     <tr>
       <td>úteis</td>
-      <td>plataforma</td>
+      <td>programas</td>
       <td>costumes</td>
       <td>costumes</td>
     </tr>
     <tr>
       <td>ária</td>
-      <td>programas</td>
+      <td>médicas</td>
       <td>útero</td>
       <td>vazio</td>
     </tr>
     <tr>
       <td>workshops</td>
-      <td>música</td>
+      <td>costumes</td>
       <td>úteis</td>
       <td>valem</td>
     </tr>
     <tr>
       <td>votam</td>
-      <td>vontade</td>
+      <td>música</td>
       <td>ária</td>
       <td>usuário</td>
     </tr>
     <tr>
       <td>vivências</td>
-      <td>sentido</td>
+      <td>vazio</td>
       <td>workshops</td>
       <td>preparação</td>
     </tr>
     <tr>
       <td>visualizações</td>
-      <td>idade</td>
+      <td>valem</td>
       <td>votam</td>
       <td>bruto</td>
     </tr>
     <tr>
       <td>virgindade</td>
-      <td>aconteceu</td>
+      <td>usuário</td>
       <td>vivências</td>
       <td>oferecem</td>
     </tr>
     <tr>
       <td>verbalmente</td>
-      <td>saúde</td>
+      <td>preparação</td>
       <td>visualizações</td>
       <td>influentes</td>
     </tr>
     <tr>
       <td>vendedor</td>
-      <td>filhos</td>
+      <td>bruto</td>
       <td>virgindade</td>
       <td>experiências</td>
     </tr>
@@ -13891,7 +13927,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">mim</span><span class="p">,</span><span class="n">emim</span><span class="p">,</span><span class="n">chi_square</span><span class="p">,</span><span class="n">dice_coef</span><span class="p">]</span>
@@ -13900,7 +13936,7 @@ $( document ).ready(code_toggle);
 
 <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">,</span>
-                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
     
@@ -13949,62 +13985,62 @@ $( document ).ready(code_toggle);
   <tbody>
     <tr>
       <td>úteis</td>
-      <td>vida</td>
+      <td>significa</td>
       <td>justamente</td>
       <td>significa</td>
     </tr>
     <tr>
       <td>ítalo-americano</td>
-      <td>mundo</td>
-      <td>significa</td>
+      <td>justamente</td>
+      <td>salto</td>
       <td>justamente</td>
     </tr>
     <tr>
       <td>ítalo-americana</td>
-      <td>presidente</td>
-      <td>salto</td>
+      <td>realidade</td>
+      <td>estranhas</td>
       <td>mostrar</td>
     </tr>
     <tr>
       <td>índole</td>
-      <td>país</td>
-      <td>estranhas</td>
+      <td>ficção</td>
+      <td>cristão</td>
       <td>ficção</td>
     </tr>
     <tr>
       <td>êxito</td>
-      <td>reais</td>
-      <td>cristão</td>
+      <td>mostrar</td>
+      <td>animação</td>
       <td>realidade</td>
     </tr>
     <tr>
       <td>éticas</td>
-      <td>Brasil</td>
-      <td>animação</td>
+      <td>perder</td>
+      <td>Cohen</td>
       <td>perder</td>
     </tr>
     <tr>
       <td>ânus</td>
-      <td>política</td>
-      <td>Cohen</td>
+      <td>acreditam</td>
+      <td>inédito</td>
       <td>chama</td>
     </tr>
     <tr>
       <td>ânsias</td>
-      <td>disse</td>
+      <td>salto</td>
       <td>ficção</td>
       <td>acreditam</td>
     </tr>
     <tr>
       <td>ávido</td>
-      <td>época</td>
+      <td>chama</td>
       <td>acreditam</td>
       <td>efeito</td>
     </tr>
     <tr>
       <td>áspero</td>
-      <td>milhões</td>
-      <td>inédito</td>
+      <td>vida</td>
+      <td>sentar</td>
       <td>conteúdo</td>
     </tr>
   </tbody>
@@ -14029,7 +14065,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">mim</span><span class="p">,</span><span class="n">emim</span><span class="p">,</span><span class="n">chi_square</span><span class="p">,</span><span class="n">dice_coef</span><span class="p">]</span>
@@ -14038,7 +14074,7 @@ $( document ).ready(code_toggle);
 
 <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;hostil&#39;</span><span class="p">,</span>
-                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
     <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
     
@@ -14159,7 +14195,10 @@ $( document ).ready(code_toggle);
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><em>EMIM</em> seems to have the best results, as in the more coherent with the term <em>hostil</em></li>
+<li><em>EMIM</em> seems to have the best results, as in the more coherent with the term <em>hostil</em><ul>
+<li><em>delicado</em> is a notable exception, still overall the result is maintained</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -14186,7 +14225,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../output/results.csv&quot;</span><span class="p">)</span>
@@ -14203,7 +14242,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[11]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
@@ -14314,7 +14353,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">recall_score</span><span class="p">(</span><span class="n">true_docs</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
@@ -14367,7 +14406,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">conjunctive_retrieval_by_term</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -14436,7 +14475,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
@@ -14450,10 +14489,10 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">term</span><span class="p">]</span> <span class="o">+</span> <span class="n">top_10</span>
@@ -14512,19 +14551,19 @@ $( document ).ready(code_toggle);
       <td>[85, 110, 151, 229, 242]</td>
     </tr>
     <tr>
-      <td>[Instagram, sociais, redes, deu]</td>
+      <td>[Instagram, publicadas, contínuos, Gallup]</td>
       <td>3</td>
-      <td>[18, 151, 229, 85, 242, 2, 13, 46, 124, 165]</td>
+      <td>[85, 151]</td>
     </tr>
     <tr>
-      <td>[Instagram, sociais, redes, deu, 5, país]</td>
+      <td>[Instagram, publicadas, contínuos, Gallup, soc...</td>
       <td>5</td>
-      <td>[165, 18, 85, 137, 64, 114, 151, 24, 187, 229]</td>
+      <td>[210, 85, 151, 213, 150, 18, 19, 35, 204, 228]</td>
     </tr>
     <tr>
-      <td>[Instagram, sociais, redes, deu, 5, país, apar...</td>
+      <td>[Instagram, publicadas, contínuos, Gallup, soc...</td>
       <td>10</td>
-      <td>[151, 165, 18, 85, 229, 137, 64, 24, 114, 187]</td>
+      <td>[85, 151, 210, 229, 35, 110, 150, 213, 124, 18]</td>
     </tr>
   </tbody>
 </table>
@@ -14538,7 +14577,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">direct_docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">source</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -14555,7 +14594,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[16]:</div>
+    <div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -14630,7 +14669,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;max_colwidth&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
@@ -14649,7 +14688,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[17]:</div>
+    <div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -14679,16 +14718,16 @@ $( document ).ready(code_toggle);
   </thead>
   <tbody>
     <tr>
-      <th>64</th>
-      <td>O incerto futuro dos militares que desertaram na Venezuela</td>
-      <td>Mais de mil venezuelanos que desertaram há um mês aguardam em casas  hotéis e albergues sem esconder seu mal-estar quanto às condições em que vivem</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/23/internacional/1553364735_261696.html</td>
+      <th>35</th>
+      <td>Finlândia conclui experiência de renda básica universal com resultados ambíguos</td>
+      <td>Durante dois anos  2.000 pessoas desempregadas receberam 2.370 reais por mês. Saúde  autoestima e otimismo dos beneficiários melhoraram  mas situação profissional pouco mudou</td>
+      <td>https://brasil.elpais.com/brasil/2019/02/09/economia/1549710265_204922.html</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Governo Bolsonaro prega “negacionismo histórico” sobre a ditadura</td>
-      <td>Marcos Napolitano  professor da USP  diz que o discurso do Governo Bolsonaro sobre o golpe de 64 está mais para negacionismo  pois “tem um ponto de partida ideológico  com objetivo de ocultar o pa...</td>
-      <td>https://brasil.elpais.com/brasil/2019/04/05/politica/1554419295_939718.html</td>
+      <th>228</th>
+      <td>Quem pagou pelo vídeo revisionista da ditadura distribuído pelo Governo Bolsonaro?</td>
+      <td>“É preciso saber se foi pago com recursos públicos”  diz Gil Castello Branco  do Contas Abertas. Ao 'Globo'  ator disse ter sido pago. Mourão disse que ideia foi de Bolsonaro</td>
+      <td>https://brasil.elpais.com/brasil/2019/04/01/politica/1554151562_942843.html</td>
     </tr>
     <tr>
       <th>229</th>
@@ -14697,22 +14736,10 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/04/01/politica/1554118634_296372.html</td>
     </tr>
     <tr>
-      <th>165</th>
-      <td>Bolsonaro manda festejar o crime</td>
-      <td>Ao determinar a comemoração do golpe militar de 1964  o antipresidente busca manter o ódio ativo e barrar qualquer possibilidade de justiça</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/27/opinion/1553688411_058227.html</td>
-    </tr>
-    <tr>
-      <th>137</th>
-      <td>Curto-circuito político faz da economia o calcanhar de Aquiles de Bolsonaro</td>
-      <td>Dificuldade de reverter o quadro é atribuída a vários fatores. Contas públicas no vermelho e contenção de gastos impedem que Governo impulsione a atividade econômica  como aconteceu em outras crises</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/21/economia/1553205979_786023.html</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Ricardo olha para a tela do celular e diz: “Eu estou falando comigo mesmo”</td>
-      <td>Em 'Ricardo e Vânia'  de Chico Felitti  os outros lados da vida do Fofão da Augusta  incluindo a história do seu grande amor. Leia trecho</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/18/cultura/1552939185_343444.html</td>
+      <th>204</th>
+      <td>A guerra de todos contra todos no Governo Bolsonaro</td>
+      <td>Com chamado aberto à comemoração do golpe de 1964  presidente dobra sua aposta na polarização política</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/26/politica/1553557825_337887.html</td>
     </tr>
     <tr>
       <th>110</th>
@@ -14721,16 +14748,16 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/04/02/internacional/1554216611_825972.html</td>
     </tr>
     <tr>
-      <th>46</th>
-      <td>Paulínia FC  o time da ‘Hollywood brasileira’ salvo pela venda de Fabinho ao Liverpool</td>
-      <td>Clube de cidade que já foi polo cinematográfico do Brasil quita suas dívidas e quer voltar ao futebol profissional com dinheiro da transferência do jogador</td>
-      <td>https://brasil.elpais.com/brasil/2019/02/25/deportes/1551113110_622364.html</td>
-    </tr>
-    <tr>
       <th>242</th>
       <td>A fortuna blindada de Cristiano Ronaldo</td>
       <td>Atacante criou um império empresarial em cuja direção colocou sua família e um círculo muito íntimo de amigos</td>
       <td>https://brasil.elpais.com/brasil/2019/03/22/deportes/1553256281_127660.html</td>
+    </tr>
+    <tr>
+      <th>210</th>
+      <td>“Refletir sobre nosso comportamento online é mais importante do que votar”</td>
+      <td>Pesquisador inglês Jamie Bartlett chama atenção para a cidadania na Internet:</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/26/politica/1553628705_921854.html</td>
     </tr>
     <tr>
       <th>18</th>
@@ -14739,16 +14766,16 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/03/06/opinion/1551904505_351681.html</td>
     </tr>
     <tr>
-      <th>114</th>
-      <td>Esportes vivem paralisia sem planos detalhados e nomeações travadas</td>
-      <td>Rebaixada de ministério a secretaria  política esportiva de Bolsonaro espelha modelo do regime ditatorial  com militares na linha de frente  engessada pela falta de autonomia</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/30/deportes/1553901938_175156.html</td>
-    </tr>
-    <tr>
       <th>85</th>
       <td>Presidente na ficção  humorista é favorito em disputa eleitoral na Ucrânia</td>
       <td>Admirador declarado de Bolsonaro  o ator Volodymyr Zelenskiy lidera as pesquisas para as eleições deste domingo explorando a insatisfação popular com a elite política</td>
       <td>https://brasil.elpais.com/brasil/2019/03/28/internacional/1553803929_078467.html</td>
+    </tr>
+    <tr>
+      <th>213</th>
+      <td>A tensão em escolas e universidades na esteira do massacre de Suzano</td>
+      <td>Instituições buscam formas para lidar com ameaças  várias delas já identificadas pelas autoridades policiais como trote de adolescentes</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/21/politica/1553207769_581816.html</td>
     </tr>
     <tr>
       <th>151</th>
@@ -14757,16 +14784,16 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/03/07/opinion/1551972909_806992.html</td>
     </tr>
     <tr>
-      <th>24</th>
-      <td>Boris Fausto e o golpe de 64: “É impossível ir contra fatos estabelecidos”</td>
-      <td>Historiador diz que as Forças Armadas nunca reconheceram os aspectos mais negativos do regime militar e que não havia ameaça imediata de implantação de um regime comunista</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/30/politica/1553984610_147330.html</td>
+      <th>150</th>
+      <td>Quem mandou matar Marielle? E por quê?</td>
+      <td>Bolsonaro  que governa o Brasil pela administração do ódio  deveria ser o maior interessado em desvendar o crime</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/13/opinion/1552485039_897963.html</td>
     </tr>
     <tr>
-      <th>187</th>
-      <td>O que aconteceria se os museus europeus tivessem que devolver a arte colonial espoliada?</td>
-      <td>Holanda e França decidem devolver obras de arte aos seus lugares de origem  mas a questão se estende a países de quase todo o continente</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/14/cultura/1552575802_167574.html</td>
+      <th>19</th>
+      <td>Igualdade radical</td>
+      <td>Movimento feminista impõe uma nova energia democratizante</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/07/opinion/1551972628_054337.html</td>
     </tr>
     <tr>
       <th>124</th>
@@ -14798,7 +14825,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_docs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">229</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span>  <span class="mi">85</span><span class="p">,</span> <span class="mi">151</span><span class="p">]</span> <span class="o">+</span> <span class="n">direct_docs</span>
@@ -14844,25 +14871,25 @@ $( document ).ready(code_toggle);
       <td>0.833333</td>
     </tr>
     <tr>
-      <td>[Instagram, sociais, redes, deu]</td>
+      <td>[Instagram, publicadas, contínuos, Gallup]</td>
       <td>3</td>
-      <td>[18, 151, 229, 85, 242, 2, 13, 46, 124, 165]</td>
+      <td>[85, 151]</td>
+      <td>1.0</td>
+      <td>0.333333</td>
+    </tr>
+    <tr>
+      <td>[Instagram, publicadas, contínuos, Gallup, sociais, tarifas]</td>
+      <td>5</td>
+      <td>[210, 85, 151, 213, 150, 18, 19, 35, 204, 228]</td>
+      <td>0.3</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>[Instagram, publicadas, contínuos, Gallup, sociais, tarifas, exibe, aparece, totalmente, torna, jogam]</td>
+      <td>10</td>
+      <td>[85, 151, 210, 229, 35, 110, 150, 213, 124, 18]</td>
       <td>0.5</td>
       <td>0.833333</td>
-    </tr>
-    <tr>
-      <td>[Instagram, sociais, redes, deu, 5, país]</td>
-      <td>5</td>
-      <td>[165, 18, 85, 137, 64, 114, 151, 24, 187, 229]</td>
-      <td>0.4</td>
-      <td>0.666667</td>
-    </tr>
-    <tr>
-      <td>[Instagram, sociais, redes, deu, 5, país, aparece, totalmente, torna, Partido, votos]</td>
-      <td>10</td>
-      <td>[151, 165, 18, 85, 229, 137, 64, 24, 114, 187]</td>
-      <td>0.4</td>
-      <td>0.666667</td>
     </tr>
   </tbody>
 </table>
@@ -14894,7 +14921,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
@@ -14908,10 +14935,10 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">term</span><span class="p">]</span> <span class="o">+</span> <span class="n">top_10</span>
@@ -14970,19 +14997,19 @@ $( document ).ready(code_toggle);
       <td>[213, 30, 85, 137, 188, 18, 25, 27, 36, 40]</td>
     </tr>
     <tr>
-      <td>[real, vida, mundo, presidente]</td>
+      <td>[real, significa, justamente, realidade]</td>
       <td>3</td>
-      <td>[165, 62, 150, 18, 85, 215, 129, 172, 173, 24]</td>
+      <td>[18, 3, 11, 98, 137, 151, 165, 30, 59, 124]</td>
     </tr>
     <tr>
-      <td>[real, vida, mundo, presidente, país, reais]</td>
+      <td>[real, significa, justamente, realidade, ficção, mostrar]</td>
       <td>5</td>
-      <td>[150, 165, 206, 18, 172, 62, 85, 75, 17, 24]</td>
+      <td>[18, 30, 165, 11, 98, 137, 151, 183, 3, 59]</td>
     </tr>
     <tr>
-      <td>[real, vida, mundo, presidente, país, reais, Brasil, política, disse, época, milhões]</td>
+      <td>[real, significa, justamente, realidade, ficção, mostrar, perder, acreditam, salto, chama, vida]</td>
       <td>10</td>
-      <td>[150, 165, 18, 172, 68, 21, 75, 114, 25, 137]</td>
+      <td>[165, 18, 30, 183, 11, 98, 151, 137, 148, 172]</td>
     </tr>
   </tbody>
 </table>
@@ -14996,7 +15023,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">direct_docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">source</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -15013,7 +15040,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
+    <div class="prompt output_prompt">Out[22]:</div>
 
 
 
@@ -15369,7 +15396,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;max_colwidth&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
@@ -15387,7 +15414,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[22]:</div>
+    <div class="prompt output_prompt">Out[23]:</div>
 
 
 
@@ -15417,10 +15444,10 @@ $( document ).ready(code_toggle);
   </thead>
   <tbody>
     <tr>
-      <th>129</th>
-      <td>A universidade que quer oferecer uma educação do nível de Harvard pela metade do preço</td>
-      <td>Chama-se Minerva  e seus alunos estudam em sete cidades espalhadas pelo mundo  provocando uma revolução no panorama universitário dos EUA</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/05/economia/1551780790_307325.html</td>
+      <th>3</th>
+      <td>Quando os pais de Gabo perceberam que tinham um filho mentiroso</td>
+      <td>Gustavo Tatis percorre o universo de García Márquez e seus segredos de família  intimamente ligados à obra que a Netflix adaptará para as telas</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/06/cultura/1551888378_718292.html</td>
     </tr>
     <tr>
       <th>137</th>
@@ -15429,10 +15456,10 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/03/21/economia/1553205979_786023.html</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>Um tuíte muito vulgar</td>
-      <td>Bolsonaro lança cortina de fumaça nas redes sociais em detrimento da imagem institucional do Brasil</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/07/opinion/1551926876_408228.html</td>
+      <th>11</th>
+      <td>As imagens questionadoras de Harun Farocki</td>
+      <td>Artista alemão protagoniza mostra no IMS  em meio a debate sobre o papel da arte como crítica sociopolítica</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/12/cultura/1552400966_974298.html</td>
     </tr>
     <tr>
       <th>18</th>
@@ -15441,22 +15468,16 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/03/06/opinion/1551904505_351681.html</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>Taurus  ascensão de uma fabricante de armas com Bolsonaro</td>
-      <td>Chegada do ultradireitista ao poder faz disparar as ações  mas cifras não ofuscam crise profunda da empresa</td>
-      <td>https://brasil.elpais.com/brasil/2019/01/09/economia/1547038307_822194.html</td>
+      <th>148</th>
+      <td>Bolsonaro: proibidão para menores e maiores</td>
+      <td>O preconceituoso capitão-presidente reivindica e cumpre o lugar de fala de um Brasil da pornochanchada</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/11/opinion/1552309318_164942.html</td>
     </tr>
     <tr>
-      <th>150</th>
-      <td>Quem mandou matar Marielle? E por quê?</td>
-      <td>Bolsonaro  que governa o Brasil pela administração do ódio  deveria ser o maior interessado em desvendar o crime</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/13/opinion/1552485039_897963.html</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>Boris Fausto e o golpe de 64: “É impossível ir contra fatos estabelecidos”</td>
-      <td>Historiador diz que as Forças Armadas nunca reconheceram os aspectos mais negativos do regime militar e que não havia ameaça imediata de implantação de um regime comunista</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/30/politica/1553984610_147330.html</td>
+      <th>151</th>
+      <td>Socialismo ‘millennial’ nos EUA</td>
+      <td>A temida palavra ‘socialista’ já não é mais tabu entre os jovens do país. Críticos da má distribuição de oportunidades e do ‘status quo’  encontraram sua voz em Alexandria Ocasio-Cortez</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/07/opinion/1551972909_806992.html</td>
     </tr>
     <tr>
       <th>25</th>
@@ -15501,40 +15522,22 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/04/03/opinion/1554293843_323322.html</td>
     </tr>
     <tr>
-      <th>173</th>
-      <td>Os sete tiros de fuzil do presidente</td>
-      <td>A guerra  a das armas e das ideologias  é a grama que melhor parece crescer nesse jardim sombrio do capitão reformado caçador de conflitos</td>
-      <td>https://brasil.elpais.com/brasil/2019/04/05/opinion/1554415514_520936.html</td>
+      <th>183</th>
+      <td>A dolorosa vida e a enigmática morte do verdadeiro Dumbo  o elefante triste</td>
+      <td>Tim Burton estreia nesta quinta-feira nova versão sobre a primeira estrela do mundo animal moderno.</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/27/cultura/1553683661_716377.html</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>A mecenas que levou a obra de 16 brasileiros ao Museu Reina Sofía  na Espanha</td>
+      <td>Patricia de Cisneiros  colecionadora venezuelana que fez a doação museu de Madri  afirma que nenhum local pode mais ignorar a arte do continente. “Tenho a sensação de missão cumprida"</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/11/cultura/1552298934_664673.html</td>
     </tr>
     <tr>
       <th>188</th>
       <td>‘O Poderoso Chefão’ e a construção do mito do mafioso</td>
       <td>Romance de Mario Puzo que consagrou a figura do ‘cappo’ por excelência completa meio século de publicação</td>
       <td>https://brasil.elpais.com/brasil/2019/03/25/cultura/1553527664_046647.html</td>
-    </tr>
-    <tr>
-      <th>62</th>
-      <td>“Chamar-me de traidor foi uma estratégia muito bem montada para minar minha liderança”</td>
-      <td>Ex-presidente conversa sobre seu livro ‘La Batalla por la Paz’  um relato repleto de detalhes  casos e confidências sobre as negociações com as FARC</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/22/internacional/1553283034_089639.html</td>
-    </tr>
-    <tr>
-      <th>68</th>
-      <td>Steve Bannon: “Bolsonaro e Salvini são os melhores representantes do movimento nacional-populista”</td>
-      <td>Em entrevista ao EL PAÍS  o ideólogo da extrema direita diz que o vice-primeiro-ministro italiano e o premiê húngaro Viktor Orbán são os políticos mais importantes da Europa atualmente</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/24/internacional/1553454729_290547.html</td>
-    </tr>
-    <tr>
-      <th>75</th>
-      <td>Crianças condenadas ao fogo e ao descaso</td>
-      <td>Creche em Janaúba  Museu Nacional e os garotos do Ninho. Retratos de uma nação que queima o passado com a mesma passividade que destrói suas perspectivas de futuro</td>
-      <td>https://brasil.elpais.com/brasil/2019/02/21/deportes/1550784946_705165.html</td>
-    </tr>
-    <tr>
-      <th>206</th>
-      <td>Dois assessores de Bolsonaro doaram mais de 100.000 reais a campanhas da família</td>
-      <td>Levantamento da Pública mostra que outros cinco assessores prestaram serviços de campanha enquanto estavam contratados pelo atual presidente ou seus três filhos</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/21/politica/1553173153_987739.html</td>
     </tr>
     <tr>
       <th>85</th>
@@ -15549,16 +15552,16 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/03/21/politica/1553207769_581816.html</td>
     </tr>
     <tr>
-      <th>215</th>
-      <td>Um Brasil de dedo em riste às portas do Mackenzie</td>
-      <td>A expectativa de uma visita do presidente Jair Bolsonaro à universidade em São Paulo  cenário emblemático da luta estudantil durante a ditadura  gerou embates inflamados entre estudantes e bolsona...</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/27/politica/1553717682_889482.html</td>
+      <th>98</th>
+      <td>Milícia  o exército popular a serviço de Maduro</td>
+      <td>O poder do líder bolivariano na Venezuela se baseia no exército e nas milícias  um corpo de um milhão de pessoas treinadas com vassouras e rifles  que prometem dar suas vidas pela Revolução</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/29/internacional/1553824596_128119.html</td>
     </tr>
     <tr>
-      <th>114</th>
-      <td>Esportes vivem paralisia sem planos detalhados e nomeações travadas</td>
-      <td>Rebaixada de ministério a secretaria  política esportiva de Bolsonaro espelha modelo do regime ditatorial  com militares na linha de frente  engessada pela falta de autonomia</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/30/deportes/1553901938_175156.html</td>
+      <th>124</th>
+      <td>A enorme (e inadiável) tarefa de regular o capitalismo digital</td>
+      <td>Uma década depois do nascimento de plataformas como Airbnb e Uber  as administrações públicas enfrentam o desafio de dar forma a um fenômeno destinado a transformar o modelo de produção e as relaç...</td>
+      <td>https://brasil.elpais.com/brasil/2019/02/23/economia/1550946892_712943.html</td>
     </tr>
   </tbody>
 </table>
@@ -15576,7 +15579,7 @@ $( document ).ready(code_toggle);
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Taking a closer look at each document, the following ones can be classified as relevant even if they don't mention the word 'real' directly (e.g. talk about reality or brazilian currency):</p>
 <ul>
-<li>172, 68, 75, 173, 206, 17, 18, 114, 25, 85, 150, 215, 24, 62</li>
+<li>3, 137, 151, 172, 27, 183, 188, 85</li>
 </ul>
 
 </div>
@@ -15584,10 +15587,10 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_docs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">172</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">173</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">215</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">62</span><span class="p">]</span> <span class="o">+</span> <span class="n">direct_docs</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_docs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">151</span><span class="p">,</span> <span class="mi">172</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">183</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="mi">85</span><span class="p">]</span> <span class="o">+</span> <span class="n">direct_docs</span>
 <span class="n">true_docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">true_docs</span><span class="p">))</span>
 
 <span class="n">df_queries</span><span class="p">[</span><span class="s2">&quot;precision&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_queries</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">docs</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">true_docs</span><span class="p">,</span> <span class="n">docs</span><span class="p">))</span>
@@ -15627,28 +15630,28 @@ $( document ).ready(code_toggle);
       <td>0</td>
       <td>[213, 30, 85, 137, 188, 18, 25, 27, 36, 40]</td>
       <td>1.0</td>
-      <td>0.088496</td>
+      <td>0.090909</td>
     </tr>
     <tr>
-      <td>[real, vida, mundo, presidente]</td>
+      <td>[real, significa, justamente, realidade]</td>
       <td>3</td>
-      <td>[165, 62, 150, 18, 85, 215, 129, 172, 173, 24]</td>
+      <td>[18, 3, 11, 98, 137, 151, 165, 30, 59, 124]</td>
       <td>1.0</td>
-      <td>0.088496</td>
+      <td>0.090909</td>
     </tr>
     <tr>
-      <td>[real, vida, mundo, presidente, país, reais]</td>
+      <td>[real, significa, justamente, realidade, ficção, mostrar]</td>
       <td>5</td>
-      <td>[150, 165, 206, 18, 172, 62, 85, 75, 17, 24]</td>
+      <td>[18, 30, 165, 11, 98, 137, 151, 183, 3, 59]</td>
       <td>1.0</td>
-      <td>0.088496</td>
+      <td>0.090909</td>
     </tr>
     <tr>
-      <td>[real, vida, mundo, presidente, país, reais, Brasil, política, disse, época, milhões]</td>
+      <td>[real, significa, justamente, realidade, ficção, mostrar, perder, acreditam, salto, chama, vida]</td>
       <td>10</td>
-      <td>[150, 165, 18, 172, 68, 21, 75, 114, 25, 137]</td>
+      <td>[165, 18, 30, 183, 11, 98, 151, 137, 148, 172]</td>
       <td>1.0</td>
-      <td>0.088496</td>
+      <td>0.090909</td>
     </tr>
   </tbody>
 </table>
@@ -15664,7 +15667,8 @@ $( document ).ready(code_toggle);
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Expanding the query did not change the results</li>
+<li>Expanding overall improves recall and worsens the precision</li>
+<li>Expanding with more than 3 terms improves recall and precision locally</li>
 </ul>
 
 </div>
@@ -15680,7 +15684,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
@@ -15694,10 +15698,10 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">term</span><span class="p">]</span> <span class="o">+</span> <span class="n">top_10</span>
@@ -15756,19 +15760,19 @@ $( document ).ready(code_toggle);
       <td>[160, 88, 123, 140, 196]</td>
     </tr>
     <tr>
-      <td>[reprodução, vida, plataforma, programas]</td>
+      <td>[reprodução, plataforma, programas, médicas]</td>
       <td>3</td>
-      <td>[194, 165, 196, 13, 32, 68, 111, 150, 8, 75]</td>
+      <td>[196, 160, 123, 79, 109, 114, 11, 17, 41, 80]</td>
     </tr>
     <tr>
-      <td>[reprodução, vida, plataforma, programas, música, vontade]</td>
+      <td>[reprodução, plataforma, programas, médicas, costumes, música]</td>
       <td>5</td>
-      <td>[194, 196, 150, 165, 182, 13, 18, 140, 32, 62]</td>
+      <td>[196, 160, 123, 109, 79, 114, 11, 17, 41, 80]</td>
     </tr>
     <tr>
-      <td>[reprodução, vida, plataforma, programas, música, vontade, sentido, idade, aconteceu, saúde, filhos]</td>
+      <td>[reprodução, plataforma, programas, médicas, costumes, música, vazio, valem, usuário, preparação, bruto]</td>
       <td>10</td>
-      <td>[194, 196, 160, 165, 88, 5, 13, 197, 210, 238]</td>
+      <td>[196, 123, 160, 109, 114, 79, 11, 17, 41, 80]</td>
     </tr>
   </tbody>
 </table>
@@ -15782,7 +15786,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">direct_docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">source</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -15799,7 +15803,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[26]:</div>
+    <div class="prompt output_prompt">Out[27]:</div>
 
 
 
@@ -15874,7 +15878,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">documents</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">df_queries</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
@@ -15891,7 +15895,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[27]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -15921,76 +15925,10 @@ $( document ).ready(code_toggle);
   </thead>
   <tbody>
     <tr>
-      <th>5</th>
-      <td>Rosângela  uma das crianças sequestradas por famílias de militares na ditadura</td>
-      <td>“Roubaram minha identidade”  diz Rosângela Paraná  cuja certidão de nascimento foi forjada pelo avô sargento.</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/29/politica/1553877780_122371.html</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>O lado mais sombrio de Dickens</td>
-      <td>Escritor e jornalista tentou internar sua mulher em um manicômio para poder se relacionar com atriz</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/01/cultura/1551475506_900644.html</td>
-    </tr>
-    <tr>
-      <th>140</th>
-      <td>Spotify lança publicidade apenas para pessoas felizes</td>
-      <td>A plataforma de música em ‘streaming’ estreia com a Renault sua primeira campanha de ‘happy targeting’  que só mostra os anúncios a quem ouve listas de reprodução mais alegres</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/24/economia/1553429256_346859.html</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Ricardo olha para a tela do celular e diz: “Eu estou falando comigo mesmo”</td>
-      <td>Em 'Ricardo e Vânia'  de Chico Felitti  os outros lados da vida do Fofão da Augusta  incluindo a história do seu grande amor. Leia trecho</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/18/cultura/1552939185_343444.html</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Bolsonaro (des)governa o Brasil pelo Twitter</td>
-      <td>Ao tomar decisões pelo volume dos gritos nas redes sociais  o presidente corrompe a democracia</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/06/opinion/1551904505_351681.html</td>
-    </tr>
-    <tr>
-      <th>150</th>
-      <td>Quem mandou matar Marielle? E por quê?</td>
-      <td>Bolsonaro  que governa o Brasil pela administração do ódio  deveria ser o maior interessado em desvendar o crime</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/13/opinion/1552485039_897963.html</td>
-    </tr>
-    <tr>
       <th>160</th>
       <td>Violência obstétrica  uma forma de desumanização das mulheres</td>
       <td>O fenômeno é muito mais comum do que a novidade da palavra parece sugerir: são muitas as mulheres que ignoram ter sofrido com isso</td>
       <td>https://brasil.elpais.com/brasil/2019/03/21/opinion/1553125734_101001.html</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>A ética da solidariedade feminista</td>
-      <td>Se é preciso ouvir antes de falar  é também nosso dever falar com responsabilidade sobre as injustiças que assolam as mulheres e meninas</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/01/opinion/1551471471_656137.html</td>
-    </tr>
-    <tr>
-      <th>165</th>
-      <td>Bolsonaro manda festejar o crime</td>
-      <td>Ao determinar a comemoração do golpe militar de 1964  o antipresidente busca manter o ódio ativo e barrar qualquer possibilidade de justiça</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/27/opinion/1553688411_058227.html</td>
-    </tr>
-    <tr>
-      <th>182</th>
-      <td>Gal Costa: “É um disco alegre para tempos sombrios  no Brasil e no mundo”</td>
-      <td>Aos 73 anos  cantora grava DVD em São Paulo  sai em turnê e conversa sobre como se mantém imune  como artista  à passagem do tempo</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/22/cultura/1553273978_502097.html</td>
-    </tr>
-    <tr>
-      <th>62</th>
-      <td>“Chamar-me de traidor foi uma estratégia muito bem montada para minar minha liderança”</td>
-      <td>Ex-presidente conversa sobre seu livro ‘La Batalla por la Paz’  um relato repleto de detalhes  casos e confidências sobre as negociações com as FARC</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/22/internacional/1553283034_089639.html</td>
-    </tr>
-    <tr>
-      <th>194</th>
-      <td>‘Tears in Heaven’: a tragédia que inspirou uma das canções mais comoventes da história</td>
-      <td>Março é uma época amarga para Eric Clapton. No final desse mês  em 1991  o músico perdeu seu filho de quatro anos num acidente no quarto de um hotel. Pouco tempo depois  dedicou-lhe uma dolorosa m...</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/26/cultura/1553619196_547382.html</td>
     </tr>
     <tr>
       <th>196</th>
@@ -15999,46 +15937,58 @@ $( document ).ready(code_toggle);
       <td>https://brasil.elpais.com/brasil/2019/04/04/cultura/1554380845_480636.html</td>
     </tr>
     <tr>
-      <th>68</th>
-      <td>Steve Bannon: “Bolsonaro e Salvini são os melhores representantes do movimento nacional-populista”</td>
-      <td>Em entrevista ao EL PAÍS  o ideólogo da extrema direita diz que o vice-primeiro-ministro italiano e o premiê húngaro Viktor Orbán são os políticos mais importantes da Europa atualmente</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/24/internacional/1553454729_290547.html</td>
+      <th>41</th>
+      <td>Após acenar com embaixada  Bolsonaro anuncia escritório comercial em Jerusalém</td>
+      <td>Presidente anuncia espaço para promoção comercial na cidade que tem peso estratégico para o Governo de Benjamin Netanyahu. Israel anuncia “forte apoio” à entrada do Brasil na OCDE</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/31/politica/1554043546_030838.html</td>
     </tr>
     <tr>
-      <th>197</th>
-      <td>Todos os filmes de Tim Burton  do pior ao melhor</td>
-      <td>Aproveitamos a recente estreia de 'Dumbo' para pedir esse ranking a Rubén Romero  crítico de cinema  professor de Comunicação Audiovisual da Universidade Carlos III e especialista no cinema do dir...</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/28/cultura/1553773473_512189.html</td>
+      <th>11</th>
+      <td>As imagens questionadoras de Harun Farocki</td>
+      <td>Artista alemão protagoniza mostra no IMS  em meio a debate sobre o papel da arte como crítica sociopolítica</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/12/cultura/1552400966_974298.html</td>
     </tr>
     <tr>
-      <th>75</th>
-      <td>Crianças condenadas ao fogo e ao descaso</td>
-      <td>Creche em Janaúba  Museu Nacional e os garotos do Ninho. Retratos de uma nação que queima o passado com a mesma passividade que destrói suas perspectivas de futuro</td>
-      <td>https://brasil.elpais.com/brasil/2019/02/21/deportes/1550784946_705165.html</td>
+      <th>140</th>
+      <td>Spotify lança publicidade apenas para pessoas felizes</td>
+      <td>A plataforma de música em ‘streaming’ estreia com a Renault sua primeira campanha de ‘happy targeting’  que só mostra os anúncios a quem ouve listas de reprodução mais alegres</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/24/economia/1553429256_346859.html</td>
     </tr>
     <tr>
-      <th>210</th>
-      <td>“Refletir sobre nosso comportamento online é mais importante do que votar”</td>
-      <td>Pesquisador inglês Jamie Bartlett chama atenção para a cidadania na Internet:</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/26/politica/1553628705_921854.html</td>
+      <th>109</th>
+      <td>Só sete jovens negros no Olimpo da educação pública de Nova York</td>
+      <td>O célebre colégio Stuyvesant se torna também o epicentro da segregação: apenas 7 dos 895 novos alunos para o próximo ano letivo são afro-americanos  enquanto três quartos são asiáticos</td>
+      <td>https://brasil.elpais.com/brasil/2019/04/01/internacional/1554147846_545287.html</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>Dois sobreviventes do massacre de Parkland se suicidam na mesma semana</td>
+      <td>Comunidade escolar da Flórida  nos EUA  pede mais recursos para programas de saúde mental</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/26/internacional/1553626056_197921.html</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>Fracasso democrata para derrubar veto de Trump no Congresso</td>
+      <td>Câmara dos Representantes não consegue os dois terços de votos necessários para revogar a declaração de emergência do presidente para construção do muro com o México</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/26/internacional/1553633660_869823.html</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Um tuíte muito vulgar</td>
+      <td>Bolsonaro lança cortina de fumaça nas redes sociais em detrimento da imagem institucional do Brasil</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/07/opinion/1551926876_408228.html</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>Esportes vivem paralisia sem planos detalhados e nomeações travadas</td>
+      <td>Rebaixada de ministério a secretaria  política esportiva de Bolsonaro espelha modelo do regime ditatorial  com militares na linha de frente  engessada pela falta de autonomia</td>
+      <td>https://brasil.elpais.com/brasil/2019/03/30/deportes/1553901938_175156.html</td>
     </tr>
     <tr>
       <th>88</th>
       <td>Bruno Latour: “O sentimento de perder o mundo  agora  é coletivo”</td>
       <td>Em seu último livro  o influente pensador francês descreve um planeta onde a mudança climática altera tudo</td>
       <td>https://brasil.elpais.com/brasil/2019/03/29/internacional/1553888812_652680.html</td>
-    </tr>
-    <tr>
-      <th>238</th>
-      <td>Saúde mental dos estudantes  mais um desafio para as escolas brasileiras</td>
-      <td>Massacre de Suzano reabre debate sobre papel das instituições de ensino em identificar transtornos psiquiátricos. 80% dos alunos da rede pública com algum problema não recebem tratamento</td>
-      <td>https://brasil.elpais.com/brasil/2019/03/18/politica/1552928918_526670.html</td>
-    </tr>
-    <tr>
-      <th>111</th>
-      <td>Idoso é preso por ajudar esposa a fazer eutanásia após 30 anos de luta contra esclerose múltipla</td>
-      <td>O espanhol Ángel Hernández atendeu ao desejo da mulher María José e a ajudou a tomar um medicamento letal. “Quero o final o quanto antes”  dizia ela em outubro passado a este jornal</td>
-      <td>https://brasil.elpais.com/brasil/2019/04/04/internacional/1554365744_092895.html</td>
     </tr>
     <tr>
       <th>123</th>
@@ -16062,7 +16012,7 @@ $( document ).ready(code_toggle);
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Taking a closer look at each document, the following ones can be classified as relevant even if they don't mention the word 'reprodução' directly (e.g. talk about copying):</p>
 <ul>
-<li>5, 8, 150, 160, 196, 68, 197, 88</li>
+<li>140, 160, 196, 88</li>
 </ul>
 
 </div>
@@ -16070,10 +16020,10 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_docs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">196</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">197</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span> <span class="o">+</span> <span class="n">direct_docs</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_docs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">140</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">196</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span> <span class="o">+</span> <span class="n">direct_docs</span>
 <span class="n">true_docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">true_docs</span><span class="p">))</span>
 
 <span class="n">df_queries</span><span class="p">[</span><span class="s2">&quot;precision&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_queries</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">docs</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">true_docs</span><span class="p">,</span> <span class="n">docs</span><span class="p">))</span>
@@ -16113,28 +16063,28 @@ $( document ).ready(code_toggle);
       <td>0</td>
       <td>[160, 88, 123, 140, 196]</td>
       <td>1.0</td>
-      <td>0.5</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <td>[reprodução, vida, plataforma, programas]</td>
+      <td>[reprodução, plataforma, programas, médicas]</td>
       <td>3</td>
-      <td>[194, 165, 196, 13, 32, 68, 111, 150, 8, 75]</td>
-      <td>0.4</td>
-      <td>0.4</td>
+      <td>[196, 160, 123, 79, 109, 114, 11, 17, 41, 80]</td>
+      <td>0.3</td>
+      <td>0.6</td>
     </tr>
     <tr>
-      <td>[reprodução, vida, plataforma, programas, música, vontade]</td>
+      <td>[reprodução, plataforma, programas, médicas, costumes, música]</td>
       <td>5</td>
-      <td>[194, 196, 150, 165, 182, 13, 18, 140, 32, 62]</td>
+      <td>[196, 160, 123, 109, 79, 114, 11, 17, 41, 80]</td>
       <td>0.3</td>
-      <td>0.3</td>
+      <td>0.6</td>
     </tr>
     <tr>
-      <td>[reprodução, vida, plataforma, programas, música, vontade, sentido, idade, aconteceu, saúde, filhos]</td>
+      <td>[reprodução, plataforma, programas, médicas, costumes, música, vazio, valem, usuário, preparação, bruto]</td>
       <td>10</td>
-      <td>[194, 196, 160, 165, 88, 5, 13, 197, 210, 238]</td>
-      <td>0.5</td>
-      <td>0.5</td>
+      <td>[196, 123, 160, 109, 114, 79, 11, 17, 41, 80]</td>
+      <td>0.3</td>
+      <td>0.6</td>
     </tr>
   </tbody>
 </table>
@@ -16150,7 +16100,8 @@ $( document ).ready(code_toggle);
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Overall expanding the query worsens the precision and does not improve the recall</li>
+<li>Overall expanding the query worsens the precision </li>
+<li>Recall is slightly improved when more than 3 elements are added</li>
 </ul>
 
 </div>
@@ -16166,7 +16117,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
@@ -16180,10 +16131,10 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">term</span><span class="p">]</span> <span class="o">+</span> <span class="n">top_10</span>
@@ -16268,7 +16219,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">direct_docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">source</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -16285,7 +16236,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[31]:</div>
+    <div class="prompt output_prompt">Out[32]:</div>
 
 
 
@@ -16345,7 +16296,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">documents</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">df_queries</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
@@ -16362,7 +16313,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[32]:</div>
+    <div class="prompt output_prompt">Out[33]:</div>
 
 
 
@@ -16499,7 +16450,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_docs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="n">direct_docs</span>
@@ -16580,7 +16531,7 @@ $( document ).ready(code_toggle);
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Expanding with the top 3 improves recall and worsens the precision</li>
-<li>Expanding with more than 3 terms consistently worsens the overall results </li>
+<li>Expanding with more than 3 terms consistently fails to improve the overall results </li>
 </ul>
 
 </div>
@@ -16596,7 +16547,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
@@ -16610,10 +16561,10 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_10</span> <span class="o">=</span> <span class="n">n_most_related</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">inv_index</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="n">emim</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_docs</span><span class="p">)</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">top_10</span><span class="p">))</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_10</span><span class="p">]</span>
 <span class="n">top_10</span> <span class="o">=</span> <span class="p">[</span><span class="n">term</span><span class="p">]</span> <span class="o">+</span> <span class="n">top_10</span>
@@ -16698,7 +16649,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">direct_docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">source</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -16715,7 +16666,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[36]:</div>
+    <div class="prompt output_prompt">Out[37]:</div>
 
 
 
@@ -16790,7 +16741,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">documents</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">df_queries</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
@@ -16807,7 +16758,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[37]:</div>
+    <div class="prompt output_prompt">Out[38]:</div>
 
 
 
@@ -16932,7 +16883,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_docs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">168</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">149</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">94</span><span class="p">]</span> <span class="o">+</span> <span class="n">direct_docs</span>
