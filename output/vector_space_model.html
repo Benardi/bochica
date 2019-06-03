@@ -13393,29 +13393,29 @@ $( document ).ready(code_toggle);
   </thead>
   <tbody>
     <tr>
-      <th>engajar</th>
-      <td>[(10, 1), (221, 1)]</td>
-      <td>4.828314</td>
-    </tr>
-    <tr>
-      <th>eternas</th>
-      <td>[(148, 1)]</td>
+      <th>babaca</th>
+      <td>[(215, 1)]</td>
       <td>5.521461</td>
     </tr>
     <tr>
-      <th>tradições</th>
-      <td>[(7, 1), (59, 1)]</td>
-      <td>4.828314</td>
-    </tr>
-    <tr>
-      <th>alvez</th>
-      <td>[(32, 1)]</td>
+      <th>discutirmos</th>
+      <td>[(28, 1)]</td>
       <td>5.521461</td>
     </tr>
     <tr>
-      <th>engenharia</th>
-      <td>[(44, 1), (109, 1), (132, 1), (134, 1), (183, ...</td>
-      <td>3.729701</td>
+      <th>disputas</th>
+      <td>[(22, 1), (23, 1), (118, 1), (151, 1)]</td>
+      <td>4.135167</td>
+    </tr>
+    <tr>
+      <th>Mostra</th>
+      <td>[(172, 1), (240, 1)]</td>
+      <td>4.828314</td>
+    </tr>
+    <tr>
+      <th>enganar</th>
+      <td>[(128, 2), (231, 1)]</td>
+      <td>4.828314</td>
     </tr>
   </tbody>
 </table>
@@ -13451,6 +13451,20 @@ $( document ).ready(code_toggle);
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">binary_vsm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies the binary vsm to a query and document</span>
+
+<span class="sd">    Applies the &#39;binary vector space model&#39; to a query </span>
+<span class="sd">    and document, calculating a score.</span>
+
+<span class="sd">    :param pandas.core.frame.DataFrame index: inverted index.</span>
+<span class="sd">    :param list(str) query: list of terms that form a query.</span>
+<span class="sd">    :param int doc_id: id of the document.</span>
+<span class="sd">    </span>
+<span class="sd">    :return: relevance score, how relevant the document is </span>
+<span class="sd">             for that query</span>
+
+<span class="sd">    :rtype: number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">index</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span>
     <span class="n">query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span>
@@ -13481,6 +13495,20 @@ $( document ).ready(code_toggle);
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tf_vsm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies the tf vsm to a query and document</span>
+
+<span class="sd">    Applies the &#39;term frequency vector space model&#39; to a query </span>
+<span class="sd">    and document, calculating a score.</span>
+
+<span class="sd">    :param pandas.core.frame.DataFrame index: inverted index.</span>
+<span class="sd">    :param list(str) query: list of terms that form a query.</span>
+<span class="sd">    :param int doc_id: id of the document.</span>
+<span class="sd">    </span>
+<span class="sd">    :return: relevance score, how relevant the document is </span>
+<span class="sd">             for that query</span>
+
+<span class="sd">    :rtype: number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">index</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span>
     <span class="n">query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span>
@@ -13528,6 +13556,20 @@ $( document ).ready(code_toggle);
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tf_idf_vsm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies the tf-idf vsm to a query and document</span>
+
+<span class="sd">    Applies the &#39;term frequency vector inverse document frequency</span>
+<span class="sd">    space model&#39; to a query and document, calculating a score.</span>
+
+<span class="sd">    :param pandas.core.frame.DataFrame index: inverted index.</span>
+<span class="sd">    :param list(str) query: list of terms that form a query.</span>
+<span class="sd">    :param int doc_id: id of the document.</span>
+<span class="sd">    </span>
+<span class="sd">    :return: relevance score, how relevant the document is </span>
+<span class="sd">             for that query</span>
+
+<span class="sd">    :rtype: number</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
     
     <span class="n">index</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span>
     <span class="n">query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span>
@@ -13577,6 +13619,21 @@ $( document ).ready(code_toggle);
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">bm25_vsm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies the bm25 vsm to a query and document</span>
+
+<span class="sd">    Applies the &#39;Best Matching 25 space model&#39; to a query </span>
+<span class="sd">    and document, calculating a score.</span>
+
+<span class="sd">    :param pandas.core.frame.DataFrame index: inverted index.</span>
+<span class="sd">    :param list(str) query: list of terms that form a query.</span>
+<span class="sd">    :param int doc_id: id of the document.</span>
+<span class="sd">    :param int k: term frequency saturation factor</span>
+<span class="sd">    </span>
+<span class="sd">    :return: relevance score, how relevant the document is </span>
+<span class="sd">             for that query</span>
+
+<span class="sd">    :rtype: number</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
     
     <span class="n">index</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span>
     <span class="n">query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span>
@@ -13629,18 +13686,32 @@ $( document ).ready(code_toggle);
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">bisect</span> <span class="k">import</span> <span class="n">insort_left</span>
 
-<span class="n">query1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1964&quot;</span><span class="p">,</span><span class="s2">&quot;golpe&quot;</span><span class="p">,</span><span class="s2">&quot;ditadura&quot;</span><span class="p">,</span><span class="s2">&quot;Bolsonaro&quot;</span><span class="p">,</span><span class="s2">&quot;militar&quot;</span><span class="p">]</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="k">def</span> <span class="nf">get_n_best_docs</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    
+    <span class="sd">&quot;&quot;&quot;Retrieves n most relevant docs according to a strategy</span>
+
+<span class="sd">    Retrieves the n most relevant documents in a given collection</span>
+<span class="sd">    according to a given strategy.</span>
+
+<span class="sd">    :param pandas.core.frame.DataFrame index: inverted index.</span>
+<span class="sd">    :param list(str) query: list of terms that form a query.</span>
+<span class="sd">    :param list(int) docs: All documents to be evaluated </span>
+<span class="sd">                           (extracted from index if not specified).</span>
+<span class="sd">    :param function strategy: vsm strategy (its params must be </span>
+<span class="sd">                              supplied as well)</span>
+<span class="sd">    </span>
+<span class="sd">    :return: list of document ids by rank in decrescent order</span>
+
+<span class="sd">    :rtype: list((number,number))</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+
     <span class="n">n</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>
     <span class="n">strategy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;strategy&quot;</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="s2">&quot;docs&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="n">docs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;docs&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>        
-        <span class="n">docs</span> <span class="o">=</span> <span class="n">inv_index</span><span class="p">[</span><span class="s2">&quot;doc_id:freq&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">docs</span> <span class="o">=</span> <span class="n">index</span><span class="p">[</span><span class="s2">&quot;doc_id:freq&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">docs</span><span class="p">))</span>
         
     <span class="n">rank</span> <span class="o">=</span> <span class="p">[]</span>
