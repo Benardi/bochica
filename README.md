@@ -1,3 +1,10 @@
+<a href="https://github.com/Benardi/bochica">
+    <img src="https://raw.githubusercontent.com/Benardi/bochica/master/bochica_wide.png"
+         alt="bochica logo"
+         align="center">
+</a>
+
+
 # Bochica 
 
 Bochica refers primarily to the construction of an inverted index. By doing so we aim to explore concepts behind Information Retrieval and the use of a Crawler.
